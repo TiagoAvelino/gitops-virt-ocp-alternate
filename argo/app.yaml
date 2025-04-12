@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cnv-gitops-vms
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: tiago-virtual-machines 
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: overlays
+    repoURL: https://github.com/TiagoAvelino/gitops-virt-ocp-alternate
+    targetRevision: main
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
